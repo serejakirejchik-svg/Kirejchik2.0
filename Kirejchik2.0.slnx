@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Kirejchik2.0/Kirejchik2.0.vcxproj" />
+</Solution>
