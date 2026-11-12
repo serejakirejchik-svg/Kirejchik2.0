@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Kirejchik2.0/Kirejchik2.0.vcxproj" />
+  <Project Path="Kirejchik2.0/Kirejchik2.0.vcxproj" Id="6cdf8616-6ad1-4ca9-bd37-0a47d87964c9" />
 </Solution>

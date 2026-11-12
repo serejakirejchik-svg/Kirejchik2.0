@@ -1,5 +1,5 @@
 #include "Authorisation.hpp"
-
+#include "Storage.hpp"
 #include <io.h>
 #include <fcntl.h>
 
@@ -12,9 +12,18 @@ int main()
 
 	Start();
 
+	delete[]UserId;
+	delete[]LoginArr;
+	delete[]PassArr;
+	delete[]StatusArr;
 
-
-
+	if (IsStorageCreated)
+	{
+		delete[] idArr;
+		delete[] nameArr;
+		delete[] countArr;
+		delete[] priceArr;
+	}
 
 
 

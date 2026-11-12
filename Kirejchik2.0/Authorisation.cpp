@@ -1,24 +1,26 @@
 #include "Authorisation.hpp"
-#include "Accounts.hpp"
+
 void Start()
 {
 
 	while (true)
 	{
-		if (Login()
-			)
+		if (Login())
 		{
 			if (CurrentStatus == L"Sadmin")
 			{
-				
+				CreateStorage();
+				SuperAdminMenu();
 			}
 			else if (CurrentStatus == L"admin")
 			{
 				// TO_DO
+				std::wcout << L"Admin menu не сделано!\n";
 			}
 			else if (CurrentStatus == L"User")
 			{
 				// TO_DO
+				std::wcout << L"User menu не сделано!\n";
 			}
 			else
 			{
@@ -27,8 +29,10 @@ void Start()
 		}
 		else
 		{
+			system("cls");
 			std::wcout << L"Всего хорошего. Смена окончена! \n";
 			Sleep(1500);
+
 			break;
 
 		}
@@ -67,6 +71,68 @@ bool Login()
 			}
 			std::wcout << "Неверный логин или пароль! Попробуйте еще раз. \n\n";
 			Sleep(2000);
+		}
+	}
+}
+
+void SuperAdminMenu()
+{
+	std::wstring choose;
+	while (true)
+	{
+		system("cls");
+
+		std::wcout << L"1 - Начать продажу\n2 - показать склад\n";
+		std::wcout << L"3 - пополнить товары\n4 - Списать товары\n";
+		std::wcout << L"5 - изменить цены\n6 - Редактировать склад\n";
+		std::wcout << L"7 - Редактировать сотрудников\n8 - Отчет о прибыли\n";
+		std::wcout << L"0 - Выход!\n\n";
+		
+		std::wcout << L"Ввод:";
+
+		Getline(choose);
+
+		if (choose == L"1")
+		{
+
+		}
+		else if (choose == L"2")
+		{
+			ShowStorage();
+		}
+		else if (choose == L"3")
+		{
+
+
+		}
+		else if (choose == L"4")
+		{
+
+		}
+		else if (choose == L"5")
+		{
+
+		}
+		else if (choose == L"6")
+		{
+
+		}
+		else if (choose == L"7")
+		{
+
+		}
+		else if (choose == L"8")
+		{
+
+		}
+		else if (choose == L"0")
+		{
+
+		}
+		else
+		{
+				std::wcout << L"\n\nНеккоректный ввод!!!";
+				Sleep(2000);
 		}
 	}
 }
