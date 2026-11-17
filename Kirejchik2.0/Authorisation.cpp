@@ -102,16 +102,15 @@ void SuperAdminMenu()
 		}
 		else if (choose == L"3")
 		{
-
-
+			AddProduct();
 		}
 		else if (choose == L"4")
 		{
-
+			RemoveProduct();
 		}
 		else if (choose == L"5")
 		{
-
+			ChangePrice();
 		}
 		else if (choose == L"6")
 		{

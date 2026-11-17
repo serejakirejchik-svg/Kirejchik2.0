@@ -6,6 +6,7 @@
 #include <iomanip>
 
 void Getline(std::wstring& str);
+bool IsNumber(const std::wstring& str);
 
 inline void Err()
 {
