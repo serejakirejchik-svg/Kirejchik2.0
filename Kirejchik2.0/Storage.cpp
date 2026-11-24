@@ -407,7 +407,7 @@ void ChangeStorage()
 		}
 		else if (choose == L"2")
 		{
-			
+			ChangeProductName();
 		}
 		else if (choose == L"3")
 		{
