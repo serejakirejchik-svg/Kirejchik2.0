@@ -13,6 +13,7 @@ extern std::wstring* PassArr;
 extern std::wstring* StatusArr;
 extern size_t* UserId;
 
-
+void ChangeAccounts();
+void CreateNewAccount();
 
 #endif // !_ACCOUNTS_HPP_

@@ -4,7 +4,7 @@
 #include <string>
 #include <Windows.h>
 #include <iomanip>
-
+#include <cwctype>
 
 void Getline(std::wstring& str);
 bool IsNumber(const std::wstring& str);
@@ -37,4 +37,21 @@ void ArrPushBack(ArrType*& arr, size_t size)
 	delete[] plus;
 }
 
+template<class ArrType>
+void ArrDeleteIndex(ArrType*& arr, size_t size, size_t index)
+{
+	size--;
+	ArrType* temp = new ArrType[size];
+
+	for (size_t i = 0, j = 0; i < size; i++, j++)
+	{
+		if (j == index)
+		{
+			j++;
+		}
+		temp[i] = arr[j];
+	}
+	std::swap(temp, arr);
+	delete[] temp;
+}
 #endif // !_SERVICE_FUNCTIONS_HPP_

@@ -33,7 +33,7 @@ void CreateStorage(int mode)
 		double priceArrstatic[staticSize]{ 109.99, 35.99, 59.99, 69.99, 99.99, 89.99, 499.89, 299.49, 85.99, 120.09, 1299.99, 110.10 };
 		
 		sizeSt = staticSize;
-		idArr = new size_t(sizeSt);
+		idArr = new size_t[sizeSt];
 		nameArr = new std::wstring[sizeSt];
 		countArr = new size_t[sizeSt];
 		priceArr = new double[sizeSt];
@@ -95,7 +95,7 @@ void ShowStorage(int mode)
 	if (mode == 0)
 	{
 		system("cls");
-		std::wcout << L"ID\t" << std::fixed << std::left << std::setw(40) << L"Название товара:\t";
+		std::wcout << L"ID\t" << std::fixed << std::left << std::setw(40) << L"Название товара:\n\n";
 		std::wcout << L"Кол-во товара\t" << L"Цена товара\n\n";
 		for (int i = 0; i < sizeSt; i++)
 		{
@@ -108,26 +108,25 @@ void ShowStorage(int mode)
 	{
 		system("cls");
 		std::wcout << L"\n\n\n\t\t Пополнение товаров \"Краб с крабом\"\n\n";
-		std::wcout << L"ID\t" << std::left << std::setw(40) << L"Название товара:\t";
+		std::wcout << L"ID\t" << std::left << std::setw(40) << L"Название товара:\n\n";
 		std::wcout << L"Кол-во товара\t" << L"Цена товара\n\n";
 		for (int i = 0; i < sizeSt; i++)
 		{
 			std::wcout << idArr[i] << L"\t" << std::left << std::setw(30) << nameArr[i]
-				<< L"\t\t" << countArr[i] << L"\t" << std::setprecision(2) << priceArr[i] << L"\n";
+				<< L"\t\t" << countArr[i] << L"\t" << priceArr[i] << L"\n";
 		}
 		
 	}
-
 	else if (mode == 2)
 	{
 		system("cls");
-		std::wcout << L"\n\n\n\t\t Списение товаров \"Краб с крабом\"\n\n";
-		std::wcout << L"ID\t" << std::left << std::setw(40) << L"Название товара:\t";
+		std::wcout << L"\n\n\n\t\t Списание товаров \"Краб с крабом\"\n\n";
+		std::wcout << L"ID\t" << std::left << std::setw(40) << L"Название товара:\n\n";
 		std::wcout << L"Кол-во товара\t" << L"Цена товара\n\n";
 		for (int i = 0; i < sizeSt; i++)
 		{
 			std::wcout << idArr[i] << L"\t" << std::left << std::setw(30) << nameArr[i]
-				<< L"\t\t" << countArr[i] << L"\t" << std::setprecision(2) << priceArr[i] << L"\n";
+				<< L"\t\t" << countArr[i] << L"\t" << priceArr[i] << L"\n";
 		}
 		
 	}
@@ -135,7 +134,7 @@ void ShowStorage(int mode)
 	{
 		system("cls");
 		std::wcout << L"\n\n\n\t\t Изменение цены \"Краб с крабом\"\n\n";
-		std::wcout << L"ID\t" << std::left << std::setw(40) << L"Название товара:\t";
+		std::wcout << L"ID\t" << std::left << std::setw(40) << L"Название товара:\n\n";
 		std::wcout << L"Кол-во товара\t" << L"Цена товара\n\n";
 		for (int i = 0; i < sizeSt; i++)
 		{
@@ -143,21 +142,23 @@ void ShowStorage(int mode)
 				<< L"\t\t" << countArr[i] << L"\t" << std::setprecision(2) << priceArr[i] << L"\n";
 		}
 		system("pause");
+
 	}
 	else if (mode == 4)
 	{
 		system("cls");
 		std::wcout << L"\n\n\n\t\tТовары \"Краб с крабом\"\n\n";
-		std::wcout << L"ID\t" << std::left << std::setw(40) << L"Название товара:\t";
+		std::wcout << L"ID\t" << L"Название товара:\n\n";
 		for (int i = 0; i < sizeSt; i++)
 		{
-			std::wcout << idArr[i] << L"\t" << std::left << std::setw(30) << nameArr[i];
+			std::wcout << idArr[i] << L"\t" << std::left << std::setw(30) << nameArr[i] << L"\n";
 			
 		}
 	}
 	else
 	{
-
+		std::wcout << L"???";
+		Sleep(1400);
 	}
 }
 
@@ -405,13 +406,13 @@ void ChangeStorage()
 		{
 			AddNewProduct();
 		}
-		else if (choose == L"2")
+		else if (choose == L"2" && sizeSt > 0)
 		{
 			ChangeProductName();
 		}
-		else if (choose == L"3")
+		else if (choose == L"3" && sizeSt > 0)
 		{
-
+			DeleteProduct();
 		}
 		else if (choose == L"4")
 		{
@@ -425,6 +426,10 @@ void ChangeStorage()
 		}
 		else
 		{
+			if (sizeSt < 1)
+			{
+				std::wcout << L"\nСклад пуст\n\n";
+			}
 			std::wcout << L"\n\nНеккоректный ввод!!!";
 			Sleep(2000);
 		}
@@ -576,38 +581,153 @@ void AddNewProduct()
 
 void ChangeProductName()
 {
-	std::wstring chooseName;
-	ShowStorage(4);
+	std::wstring chooseName, chooseId, choose;
+	int id = 0;
+
 	while (true)
 	{
-
+		
 
 		system("cls");
+		ShowStorage(4);
 
-		std::wcout << L"Введите название нового товара или \"exit\" для выхода: ";
-		Getline(chooseName);
-
-		if (chooseName == L"exit" || chooseName == L"Exit")
+		std::wcout << L"Введите ID товара или \"exit\" для выхода: ";
+		Getline(chooseId);
+		if (chooseId == L"exit" || chooseId == L"Exit")
 		{
-			std::wcout << L"Отмена добавления нового товара";
-			Sleep(1666);
+			std::wcout << L"Завершение операции списании товара \n\n";
+			Sleep(1500);
 			return;
-		} 
-		if (chooseName.size() < 3 || chooseName.size() > 40)
-		{
-			std::wcout << L"Ошибка длинны названия товара\n";
-			std::wcout << L"Допустимое значение от 3 до 40 символов\n";
-			std::wcout << L"кол-во символов в названии товара: "
-				<< chooseName.size() << L"\n\n";
-			Sleep(1777);
 		}
-		if (IsNotSafe(chooseName, nameArr, sizeSt))
+		if (IsNumber(chooseId))
 		{
-			break;
-		}
-		else
-		{
-			std::wcout << L"Данный товар уже есть на складе!\n\n";
+			id = std::stoi(chooseId) - 1;
+			if (id < 0 || id > sizeSt - 1)
+			{
+				Err(); 
+			}
+			else
+			{
+				std::wcout << L"Введите новое название для товара: ";
+				Getline(chooseName);
+
+				if (chooseName.size() < 3 || chooseName.size() > 40)
+				{
+					std::wcout << L"Ошибка длинны названия товара\n";
+					std::wcout << L"Допустимое значение от 3 до 40 символов\n";
+					std::wcout << L"кол-во символов в названии товара: "
+						<< chooseName.size() << L"\n\n";
+					Sleep(1777);
+					continue;
+				}
+				if (!IsNotSafe(chooseName, nameArr, sizeSt))
+				{
+					std::wcout << L"Данный товар уже есть на складе!\n\n";
+				}
+				else
+				{
+					while (true)
+					{
+						system("cls");
+						std::wcout << nameArr[id] << L"----->" <<
+							chooseName << L"\n\n";
+						std::wcout << L"Подтвердить?\n1 - Да\n2 - Нет\n\nВвод: ";
+						Getline(choose);
+						if (choose == L"1")
+						{
+							std::wcout << L"Переименование завершено\n\n";
+							nameArr[id] = chooseName;
+							Sleep(1500);
+							break;
+						}
+						else if (choose == L"2")
+						{
+							std::wcout << L"Отмена изменения названия " << nameArr[id] << L"\n";
+							Sleep(1500);
+							break;
+						}
+						else
+						{
+							Err();
+						}
+					}
+				}
+			}
+
 		}
 	}
 }
+
+void DeleteProduct()
+{
+	std::wstring chooseId, pass;
+	int id = 0;
+	while (true)
+	{
+
+		system("cls");
+		ShowStorage(4);
+
+		std::wcout << L"Введите ID товара или \"exit\" для выхода: ";
+		Getline(chooseId);
+
+		if (chooseId == L"exit" || chooseId == L"Exit")
+		{
+			std::wcout << L"Завершение операции изменения названия товара";
+			Sleep(1666);
+			return;
+		}
+		if (IsNumber(chooseId))
+		{
+			id = std::stoi(chooseId) - 1;
+			if (id < 0 || id > sizeSt - 1)
+			{
+				Err();
+			}
+			else
+			{
+				std::wcout << L"Подтвердите удаление товара " << nameArr[id] <<
+					L"\nВведите пароль СуперАдминистратора: ";
+					Getline(pass);
+					if (pass == PassArr[0])
+					{
+						std::wcout << L"Удаление товара";
+
+						for (size_t i = 0; i < 3; i++)
+						{
+							Sleep(666);
+							std::wcout << L".";
+						}
+						Sleep(668);
+
+						currentStoragesize -= countArr[id];
+						ArrDeleteIndex(idArr, sizeSt, id);
+						ArrDeleteIndex(nameArr, sizeSt, id);
+						ArrDeleteIndex(countArr, sizeSt, id);
+						ArrDeleteIndex(priceArr, sizeSt, id);
+						sizeSt--;
+
+						for (size_t i = 0; i < sizeSt; i++)
+						{
+							idArr[i] = i + 1;
+						}
+
+						std::wcout << L"Товар успешно удален\n\n";
+						Sleep(1336);
+						continue;
+					}
+					else
+					{
+						Err();
+					}
+			}
+		}
+	}	
+}
+
+void ChangeMaxStorageLimits()
+{
+	std::wcout << L"В процессе разработки\n\n";
+	Sleep(1300);
+}
+

@@ -1,9 +1,6 @@
 #ifndef _AUTHORISATION_HPP_
 #define _AUTHORISATION_HPP_
 
-#include <Windows.h>
-#include "ServiceFunctions.hpp"
-#include "Accounts.hpp"
 #include "Storage.hpp"
 
 void Start();
