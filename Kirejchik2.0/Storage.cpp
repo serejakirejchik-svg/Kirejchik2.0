@@ -592,7 +592,7 @@ void ChangeProductName()
 			std::wcout << L"Отмена добавления нового товара";
 			Sleep(1666);
 			return;
-		}
+		} 
 		if (chooseName.size() < 3 || chooseName.size() > 40)
 		{
 			std::wcout << L"Ошибка длинны названия товара\n";
