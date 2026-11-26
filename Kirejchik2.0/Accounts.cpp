@@ -20,7 +20,7 @@ size_t maxLogin = 15;
 size_t minLogin = 5;
 size_t maxPass = 15;
 size_t minPass = 5;
-
+  
 std::unordered_set<wchar_t>loginSymbols;
 std::unordered_set<wchar_t>passSymbols;
 
