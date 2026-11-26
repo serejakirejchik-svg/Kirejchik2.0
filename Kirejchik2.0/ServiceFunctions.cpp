@@ -25,7 +25,7 @@ bool IsNumber(const std::wstring& str)
 		}
 }
 
-bool IsNotSafe(std::wstring& chooseName, std::wstring* nameArr, size_t nameArrSize)
+bool IsNotSafe(const std::wstring& chooseName, std::wstring* nameArr, size_t nameArrSize)
 {
 	for (size_t i = 0; i < nameArrSize; i++)
 	{

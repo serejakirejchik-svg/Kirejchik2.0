@@ -16,6 +16,8 @@ int main()
 	delete[]LoginArr;
 	delete[]PassArr;
 	delete[]StatusArr;
+	delete[]salesArr;
+	delete[]fineArr;
 
 	if (IsStorageCreated)
 	{

@@ -5,10 +5,11 @@
 #include <Windows.h>
 #include <iomanip>
 #include <cwctype>
+#include <unordered_set>
 
 void Getline(std::wstring& str);
 bool IsNumber(const std::wstring& str);
-bool IsNotSafe(std::wstring& chooseName, std::wstring*nameArr, size_t nameArrSize);
+bool IsNotSafe(const std::wstring& chooseName, std::wstring*nameArr, size_t nameArrSize);
 inline void Err()
 {
 	std::wcout << L"\n\nНеккоректный ввод!!!";
